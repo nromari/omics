@@ -76,37 +76,41 @@ print(round(f_etendue(cv_protein),2)) #etendue = 335.01
 
   #Question 2.2
 
+#f_filtrage = function(bloc, cv_bloc){
+  #for (i in length(cv_bloc)){
+    #if(abs(cv_bloc[i])>=0.15){
+     # bloc_f=bloc[,-(i+1)]
+   # }else{
+      #bloc_f=bloc[,(i+1)]
+   # }
+  #}
+  #return(bloc_f)
+#}
+#Cette 1ere fonction m'a donné des résultats cohérents avec ceux de la classe (reste 142 prot)
+#Mais inchérente avec les vrais valeurs et avec les hist...
+#C'est la 2ème qui est cohérente... A voir avec le prof
+
 f_filtrage = function(bloc, cv_bloc){
-  for (i in length(cv_bloc)){
-    if(abs(cv_bloc[i])>=0.15){
-      bloc_f=bloc[,-(i+1)]
-    }else{
-      bloc_f=bloc[,(i+1)]
-    }
-  }
+  filtre = which(cv_bloc>=0.15)
+  bloc_f = bloc[,-filtre]
   return(bloc_f)
 }
 
  #Question 3
 
 mirna_f = f_filtrage(mirna, cv_mirna)
-dim(mirna_f)
+dim(mirna_f) #Reste 103
 mrna_f = f_filtrage(mrna, cv_mrna)
-dim(mrna_f)
+dim(mrna_f) #Reste 27
 protein_f = f_filtrage(protein, cv_protein)
-dim(protein_f)
-  #142 protéines après filtrage
+dim(protein_f) #Reste 53
 
  #Question 4
 
-for(i in length(cv_mrna)){
-  if(cv_mrna[i]=max(cv_mrna)){
-    gene_var=colnames(mrna[i+1])
-  }
-}
+# j'ai supposé qu'on devait utiliser les résultats non filtrés... à voir avec le prof
+which(cv_mrna==max(cv_mrna))
+ # Le gene le plus variable est PLCD4 (conordant avec le groupe). il code pour la phopholipase C delta 4
 
-print(gene_var)
-
-
-
-
+which(colnames(protein)=="PLCD4")
+find("Phospholipase C Delta 4",colnames(protein))
+# j'ai essayé plusieurs combinaisons... introuvable
