@@ -1,3 +1,3 @@
 # omics
-TP multi-omiques
-utilisation des librairies mixOmics et tidyverse
+TP multi-omiques.
+Avec utilisation des librairies mixOmics et tidyvers.
